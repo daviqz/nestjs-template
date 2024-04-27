@@ -1,8 +1,8 @@
 import { Entity, Column, ManyToOne } from 'typeorm'
-import { BaseModel } from './abstract/base.model'
-import { Account } from './account.model'
-import { Team } from './team.model'
-import { AccountType } from './account_type.model'
+import { BaseModel } from './abstract/base.entity'
+import { Account } from './account.entity'
+import { Team } from './team.entity'
+import { AccountType } from './account_type.entity'
 
 @Entity()
 export class Membership extends BaseModel {

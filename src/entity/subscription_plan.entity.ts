@@ -1,6 +1,6 @@
-import { Entity, Column, ManyToMany, JoinTable } from 'typeorm'
-import { ProductType } from './product_type.model'
-import { BaseModel } from './abstract/base.model'
+import { Entity, Column, ManyToMany, JoinTable, JoinColumn } from 'typeorm'
+import { ProductType } from './product_type.entity'
+import { BaseModel } from './abstract/base.entity'
 
 @Entity()
 export class SubscriptionPlan extends BaseModel {
@@ -11,6 +11,7 @@ export class SubscriptionPlan extends BaseModel {
 	description: string
 
 	@ManyToMany(() => ProductType)
+	@JoinColumn({ name: 'product_type' })
 	@JoinTable()
 	productType: ProductType[]
 

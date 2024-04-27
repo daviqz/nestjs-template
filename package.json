@@ -9,7 +9,7 @@
       "build": "nest build",
       "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
       "start": "nest start",
-      "dev": "nest start --watch",
+      "start:dev": "nest start --watch",
       "start:debug": "nest start --debug --watch",
       "start:prod": "node dist/main",
       "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
@@ -18,11 +18,13 @@
       "test:cov": "jest --coverage",
       "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
       "test:e2e": "jest --config ./test/jest-e2e.json",
-      "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli",
-      "migration:generate": "typeorm migration:generate ./src/config/typeorm-datasource.config.ts ./migrations/migration12312123",
-      "migration:create": "typeorm migration:create ./migrations/${MIGRATION_NAME}",
-      "migration:run": "npm run typeorm -- --dataSource=src/config/typeorm-datasource.config.ts migration:run",
-      "migration:revert": "npm run typeorm -- --dataSource=src/config/typeorm-datasource.config.ts migration:revert"
+      "typeorm": "node -r tsconfig-paths/register ./node_modules/typeorm/cli",
+      "typeorm:ts": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli",
+      "migration:generate": "typeorm migration:generate -d dist/config/typeorm-datasource.config.js ./src/migrations/migration12312123",
+      "migration:rundev": "npm run build && npm run typeorm -- --dataSource=dist/config/typeorm-datasource.config.js migration:run",
+      "migration:run": "npm run typeorm -- --dataSource=dist/config/typeorm-datasource.config.js migration:run",
+      "migration:create": "typeorm migration:create ./src/migrations/migration-name",
+      "migration:revert": "npm run typeorm -- --dataSource=dist/config/typeorm-datasource.config.js migration:revert"
    },
    "dependencies": {
       "@nestjs/common": "^10.3.8",

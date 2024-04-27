@@ -1,8 +1,8 @@
-import { Entity, Column, ManyToOne, ManyToMany, JoinTable } from 'typeorm'
-import { BaseModel } from './abstract/base.model'
-import { ProductType } from './product_type.model'
-import { Account } from './account.model'
-import { Team } from './team.model'
+import { Entity, Column, ManyToOne, ManyToMany, JoinTable, JoinColumn } from 'typeorm'
+import { BaseModel } from './abstract/base.entity'
+import { ProductType } from './product_type.entity'
+import { Account } from './account.entity'
+import { Team } from './team.entity'
 
 @Entity()
 export class Organization extends BaseModel {
@@ -13,7 +13,8 @@ export class Organization extends BaseModel {
 	productType: ProductType
 
 	@ManyToOne(() => Account)
-	accountCreator: Account
+	@JoinColumn({ name: 'created_by' })
+	createdBy: Account
 
 	@ManyToMany(() => Account)
 	@JoinTable()

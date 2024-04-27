@@ -1,16 +1,20 @@
-import { DataSource } from 'typeorm'
+import { DataSource, DataSourceOptions } from 'typeorm'
+import { constants } from './constants'
 
-export default new DataSource({
+const dataSourceConfig: DataSourceOptions = {
 	type: 'postgres',
-	host: 'localhost',
-	port: 5432,
-	username: 'postgres',
-	password: 'postgres',
-	database: 'postgres',
+	host: constants.DATABASE.HOST,
+	port: constants.DATABASE.PORT,
+	username: constants.DATABASE.USERNAME,
+	password: constants.DATABASE.PASSWORD,
+	database: constants.DATABASE.DATABASE,
 	synchronize: false,
 	logging: false,
-	// migrations: ['src/migrations/*.js'],
-	entities: ['dist/model/*.model.js'],
-	migrations: ['migrations/*.ts'],
+	entities: ['dist/entity/*.entity.js'],
+	migrations: ['dist/migrations/*.js'],
 	subscribers: []
-})
+}
+
+export default new DataSource(dataSourceConfig)
+
+export { dataSourceConfig }

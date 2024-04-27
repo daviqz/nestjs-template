@@ -1,5 +1,5 @@
 import { Entity, Column } from 'typeorm'
-import { BaseModel } from './abstract/base.model'
+import { BaseModel } from './abstract/base.entity'
 
 @Entity()
 export class AccountType extends BaseModel {
