@@ -3,7 +3,8 @@ import { BaseModel } from './abstract/base.entity'
 import { AccountType } from './account_type.entity'
 import { Organization } from './organization.entity'
 import { Membership } from './membership.entity'
-import { AccountRegisterDTO } from 'src/dto/account-register.dto'
+import { AccountRegisterFormDTO } from 'src/dto/account-register-form.dto'
+import { AccountDTO } from 'src/dto/account.dto'
 
 @Entity()
 export class Account extends BaseModel {
@@ -34,10 +35,18 @@ export class Account extends BaseModel {
 		this.password = password
 	}
 
-	fromRegisterDTO(dto: AccountRegisterDTO): Account {
+	fromRegisterDTO(dto: AccountRegisterFormDTO): Account {
 		this.username = dto.username
 		this.email = dto.email
 		this.password = dto.password
 		return this
+	}
+
+	toDTO(): AccountDTO {
+		return {
+			username: this.username,
+			email: this.email,
+			accountViewType: this.accountViewType
+		}
 	}
 }

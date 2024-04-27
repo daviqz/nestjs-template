@@ -1,4 +1,4 @@
-export class AccountRegisterDTO {
+export class AccountRegisterFormDTO {
 	username: string
 	email: string
 	password: string
