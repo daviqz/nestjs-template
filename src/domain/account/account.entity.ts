@@ -1,10 +1,10 @@
 import { Entity, Column, ManyToOne, ManyToMany, JoinTable, OneToMany, JoinColumn } from 'typeorm'
-import { BaseModel } from './abstract/base.entity'
-import { AccountType } from './account_type.entity'
-import { Organization } from './organization.entity'
-import { Membership } from './membership.entity'
-import { AccountRegisterFormDTO } from 'src/dto/account-register-form.dto'
-import { AccountDTO } from 'src/dto/account.dto'
+import { BaseModel } from '../../common/base.entity'
+import { AccountType } from '../account-type/account-type.entity'
+import { Organization } from '../organization/organization.entity'
+import { Membership } from '../membership/membership.entity'
+import { AuthRegisterDTO } from 'src/domain/auth/dto/auth-register.dto'
+import { AccountDTO } from 'src/domain/account/dto/account.dto'
 
 @Entity()
 export class Account extends BaseModel {
@@ -35,7 +35,7 @@ export class Account extends BaseModel {
 		this.password = password
 	}
 
-	fromRegisterDTO(dto: AccountRegisterFormDTO): Account {
+	fromRegisterDTO(dto: AuthRegisterDTO): Account {
 		this.username = dto.username
 		this.email = dto.email
 		this.password = dto.password

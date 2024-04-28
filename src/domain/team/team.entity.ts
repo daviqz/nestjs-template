@@ -1,6 +1,6 @@
 import { Entity, Column, ManyToMany, JoinTable } from 'typeorm'
-import { BaseModel } from './abstract/base.entity'
-import { Account } from './account.entity'
+import { BaseModel } from '../../common/base.entity'
+import { Account } from '../account/account.entity'
 
 @Entity()
 export class Team extends BaseModel {

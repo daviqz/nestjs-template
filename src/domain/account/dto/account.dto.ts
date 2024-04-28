@@ -1,5 +1,5 @@
-import { BaseDTO } from './abstract/base.dto'
-import { AccountTypeDTO } from './account-type.dto'
+import { BaseDTO } from '../../../common/base.dto'
+import { AccountTypeDTO } from '../../account-type/account-type.dto'
 
 export class AccountDTO extends BaseDTO {
 	username: string

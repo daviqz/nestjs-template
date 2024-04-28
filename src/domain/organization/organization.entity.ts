@@ -1,8 +1,8 @@
 import { Entity, Column, ManyToOne, ManyToMany, JoinTable, JoinColumn } from 'typeorm'
-import { BaseModel } from './abstract/base.entity'
-import { ProductType } from './product_type.entity'
-import { Account } from './account.entity'
-import { Team } from './team.entity'
+import { BaseModel } from '../../common/base.entity'
+import { ProductType } from '../product-type/product-type.entity'
+import { Account } from '../account/account.entity'
+import { Team } from '../team/team.entity'
 
 @Entity()
 export class Organization extends BaseModel {
