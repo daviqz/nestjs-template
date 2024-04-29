@@ -22,7 +22,11 @@ export class Account extends BaseModel {
 	accountViewType: AccountType
 
 	@ManyToMany(() => Organization)
-	@JoinTable()
+	@JoinTable({
+		name: 'accounts_organizations',
+		joinColumn: { name: 'account_id', referencedColumnName: 'id' },
+		inverseJoinColumn: { name: 'organization_id', referencedColumnName: 'id' }
+	})
 	organizations: Organization[]
 
 	@OneToMany(() => Membership, (membership) => membership.account)

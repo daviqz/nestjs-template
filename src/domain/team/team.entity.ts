@@ -1,4 +1,4 @@
-import { Entity, Column, ManyToMany, JoinTable, JoinColumn, ManyToOne } from 'typeorm'
+import { Entity, Column, JoinColumn, ManyToOne, OneToMany } from 'typeorm'
 import { BaseModel } from '../../common/base.entity'
 import { Membership } from '../membership/membership.entity'
 import { Organization } from '../organization/organization.entity'
@@ -8,18 +8,17 @@ export class Team extends BaseModel {
 	@Column()
 	name: string
 
-	@ManyToMany(() => Membership)
-	@JoinTable()
+	@OneToMany(() => Membership, (membership) => membership.team)
 	memberships: Membership[]
 
 	@ManyToOne(() => Organization)
-	@JoinColumn({ name: 'created_by_organization_id' })
-	createdBy: Organization
+	@JoinColumn({ name: 'organization_id' })
+	organization: Organization
 
-	constructor(name?: string, memberships?: Membership[], createdBy?: Organization) {
+	constructor(name?: string, memberships?: Membership[], organization?: Organization) {
 		super()
 		this.name = name
 		this.memberships = memberships
-		this.createdBy = createdBy
+		this.organization = organization
 	}
 }

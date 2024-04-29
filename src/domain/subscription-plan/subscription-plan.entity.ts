@@ -11,7 +11,11 @@ export class SubscriptionPlan extends BaseModel {
 	description: string
 
 	@ManyToMany(() => ProductType)
-	@JoinTable()
+	@JoinTable({
+		name: 'subscription_plans_product_types',
+		joinColumn: { name: 'subscription_plan_id', referencedColumnName: 'id' },
+		inverseJoinColumn: { name: 'product_type_id', referencedColumnName: 'id' }
+	})
 	productTypes: ProductType[]
 
 	constructor(name?: string, description?: string, productTypes?: ProductType[]) {
