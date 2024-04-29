@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { AccountController } from '../../controller/account.controller'
-import { AccountService } from '../../service/account.service'
-import { dataSourceConfig } from '../typeorm-datasource.config'
-import { Account } from 'src/entity/account.entity'
+import { AccountController } from './account.controller'
+import { AccountService } from './account.service'
+import { dataSourceConfig } from '../../config/typeorm-datasource.config'
+import { Account } from 'src/domain/account/account.entity'
 
 @Module({
 	imports: [TypeOrmModule.forRoot(dataSourceConfig), TypeOrmModule.forFeature([Account])],

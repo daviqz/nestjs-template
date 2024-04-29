@@ -10,7 +10,7 @@ const dataSourceConfig: DataSourceOptions = {
 	database: constants.DATABASE.DATABASE,
 	synchronize: false,
 	logging: false,
-	entities: ['dist/entity/*.entity.js'],
+	entities: ['dist/domain/**/*.entity.js'],
 	migrations: ['dist/migrations/*.js'],
 	subscribers: []
 }
