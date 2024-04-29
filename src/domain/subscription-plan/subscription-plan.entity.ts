@@ -11,14 +11,13 @@ export class SubscriptionPlan extends BaseModel {
 	description: string
 
 	@ManyToMany(() => ProductType)
-	@JoinColumn({ name: 'product_type' })
 	@JoinTable()
-	productType: ProductType[]
+	productTypes: ProductType[]
 
-	constructor(name: string, description: string, productType: ProductType[]) {
+	constructor(name?: string, description?: string, productTypes?: ProductType[]) {
 		super()
 		this.name = name
 		this.description = description
-		this.productType = productType
+		this.productTypes = productTypes
 	}
 }

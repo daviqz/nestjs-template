@@ -8,7 +8,7 @@ export class ProductType extends BaseModel {
 	@Column()
 	description: string
 
-	constructor(name: string, description: string) {
+	constructor(name?: string, description?: string) {
 		super()
 		this.name = name
 		this.description = description

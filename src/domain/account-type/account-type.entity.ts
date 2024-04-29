@@ -1,6 +1,6 @@
 import { Entity, Column } from 'typeorm'
 import { BaseModel } from '../../common/base.entity'
-import { AccountTypeDTO } from 'src/domain/account-type/account-type.dto'
+import { AccountTypeDTO } from 'src/domain/account-type/dto/account-type.dto'
 
 @Entity()
 export class AccountType extends BaseModel {

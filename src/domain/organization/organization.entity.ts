@@ -13,7 +13,7 @@ export class Organization extends BaseModel {
 	productType: ProductType
 
 	@ManyToOne(() => Account)
-	@JoinColumn({ name: 'created_by' })
+	@JoinColumn({ name: 'created_by_account_id' })
 	createdBy: Account
 
 	@ManyToMany(() => Account)
@@ -21,10 +21,15 @@ export class Organization extends BaseModel {
 	accounts: Account[]
 
 	@ManyToOne(() => Team)
-	teams: Team
+	@JoinTable()
+	teams: Team[]
 
-	constructor(name: string) {
+	constructor(name?: string, productType?: ProductType, createdBy?: Account, accounts?: Account[], teams?: Team[]) {
 		super()
 		this.name = name
+		this.productType = productType
+		this.createdBy = createdBy
+		this.accounts = accounts
+		this.teams = teams
 	}
 }

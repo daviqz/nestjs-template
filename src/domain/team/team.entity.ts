@@ -1,18 +1,25 @@
-import { Entity, Column, ManyToMany, JoinTable } from 'typeorm'
+import { Entity, Column, ManyToMany, JoinTable, JoinColumn, ManyToOne } from 'typeorm'
 import { BaseModel } from '../../common/base.entity'
-import { Account } from '../account/account.entity'
+import { Membership } from '../membership/membership.entity'
+import { Organization } from '../organization/organization.entity'
 
 @Entity()
 export class Team extends BaseModel {
 	@Column()
 	name: string
 
-	@ManyToMany(() => Account)
+	@ManyToMany(() => Membership)
 	@JoinTable()
-	accounts: Account[]
+	memberships: Membership[]
 
-	constructor(name: string) {
+	@ManyToOne(() => Organization)
+	@JoinColumn({ name: 'created_by_organization_id' })
+	createdBy: Organization
+
+	constructor(name?: string, memberships?: Membership[], createdBy?: Organization) {
 		super()
 		this.name = name
+		this.memberships = memberships
+		this.createdBy = createdBy
 	}
 }

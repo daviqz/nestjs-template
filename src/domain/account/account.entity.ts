@@ -18,7 +18,7 @@ export class Account extends BaseModel {
 	password: string
 
 	@ManyToOne(() => AccountType)
-	@JoinColumn({ name: 'account_view_type' })
+	@JoinColumn({ name: 'account_view_type_id' })
 	accountViewType: AccountType
 
 	@ManyToMany(() => Organization)
@@ -28,11 +28,21 @@ export class Account extends BaseModel {
 	@OneToMany(() => Membership, (membership) => membership.account)
 	memberships: Membership[]
 
-	constructor(username?: string, email?: string, password?: string) {
+	constructor(
+		username?: string,
+		email?: string,
+		password?: string,
+		accountViewType?: AccountType,
+		organizations?: Organization[],
+		memberships?: Membership[]
+	) {
 		super()
 		this.username = username
 		this.email = email
 		this.password = password
+		this.accountViewType = accountViewType
+		this.organizations = organizations
+		this.memberships = memberships
 	}
 
 	fromRegisterDTO(dto: AuthRegisterDTO): Account {
@@ -46,7 +56,9 @@ export class Account extends BaseModel {
 		return {
 			username: this.username,
 			email: this.email,
-			accountViewType: this.accountViewType
+			accountViewType: this.accountViewType,
+			organizations: this.organizations,
+			memberships: this.memberships
 		}
 	}
 }
