@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common'
+import { JwtService } from '@nestjs/jwt'
+import bcrypt from 'bcrypt'
 import { AuthDTO } from './dto/auth.dto'
 import { AuthLoginDTO } from './dto/auth-login.dto'
 import { AccountService } from '../account/account.service'
@@ -7,21 +9,31 @@ import { AuthRegisterDTO } from './dto/auth-register.dto'
 
 @Injectable()
 export class AuthService {
-	constructor(private accountService: AccountService) {}
+	constructor(
+		private accountService: AccountService,
+		private jwtService: JwtService
+	) {}
 
 	async login(authLoginDTO: AuthLoginDTO): Promise<AuthDTO> {
 		const account = await this.accountService.findOneByEmail(authLoginDTO.email)
-		if (account.password !== authLoginDTO.password) {
+		if (!account) {
+			throw new Error('Conta não encontrada!')
+		}
+		const isMatch = await bcrypt.compare(authLoginDTO.password, account.password)
+		if (!isMatch) {
 			throw new Error('Senha inválida!')
 		}
-		const authDTO = account.toDTO()
+		const authAccountDTO = account.toAuthAccountDTO()
+		const accountDTO = account.toAuthTokenDTO()
+		const tokenizedAccount = await this.jwtService.signAsync(accountDTO)
 		return {
-			account: authDTO,
-			token: 'asdasfsafsafsaafsfd'
+			account: authAccountDTO,
+			token: tokenizedAccount
 		}
 	}
 
 	async register(authRegisterDTO: AuthRegisterDTO): Promise<ToastDTO> {
+		authRegisterDTO.password = await bcrypt.hash(authRegisterDTO.password, await bcrypt.genSalt())
 		await this.accountService.register(authRegisterDTO)
 		return new ToastDTO('Conta criada com sucesso!', 'success')
 	}
