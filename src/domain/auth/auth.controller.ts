@@ -13,13 +13,13 @@ export class AuthController {
 	@Public()
 	@HttpCode(HttpStatus.OK)
 	@Post('/login')
-	loginAccount(@Body() authLoginDTO: AuthLoginDTO): Promise<AuthDTO> {
-		return this.authService.login(authLoginDTO)
+	async loginAccount(@Body() authLoginDTO: AuthLoginDTO): Promise<AuthDTO> {
+		return await this.authService.login(authLoginDTO)
 	}
 
 	@Public()
 	@Post('/register')
-	registerAccount(@Body() authRegisterFormDTO: AuthRegisterDTO): Promise<ToastDTO> {
-		return this.authService.register(authRegisterFormDTO)
+	async registerAccount(@Body() authRegisterFormDTO: AuthRegisterDTO): Promise<ToastDTO> {
+		return await this.authService.register(authRegisterFormDTO)
 	}
 }

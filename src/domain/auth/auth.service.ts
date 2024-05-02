@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt'
 import bcrypt from 'bcrypt'
 import { AuthDTO } from './dto/auth.dto'
 import { AuthLoginDTO } from './dto/auth-login.dto'
-import { AccountService } from '../account/account.service'
+import { AccountService } from 'src/domain/account/account.service'
 import { ToastDTO } from 'src/common/toast.dto'
 import { AuthRegisterDTO } from './dto/auth-register.dto'
 

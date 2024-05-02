@@ -10,7 +10,7 @@ import { constants } from './config/constants'
 @Module({
 	imports: [
 		ConfigModule.forRoot({ isGlobal: true }),
-		JwtModule.register({ secret: constants().JWT_SECRET, global: true, signOptions: { expiresIn: '60s' } }),
+		JwtModule.register({ secret: constants().JWT.SECRET, global: true, signOptions: { expiresIn: constants().JWT.EXPIRES_IN } }),
 		TypeOrmModule.forRoot(dataSourceConfig()),
 		AccountModule,
 		AuthModule

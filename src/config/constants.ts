@@ -6,5 +6,8 @@ export const constants = () => ({
 		PASSWORD: process.env.DATABASE_PASSWORD,
 		DATABASE: process.env.DATABASE_NAME
 	},
-	JWT_SECRET: process.env.JWT_SECRET
+	JWT: {
+		SECRET: process.env.JWT_SECRET,
+		EXPIRES_IN: process.env.JWT_EXPIRES_IN
+	}
 })
