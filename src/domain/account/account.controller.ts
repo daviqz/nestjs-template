@@ -1,17 +1,19 @@
-import { Controller, Get, Post, Body } from '@nestjs/common'
+import { Controller, Get, UseGuards } from '@nestjs/common'
 import { AccountService } from './account.service'
+import { AuthGuard } from 'src/domain/auth/auth.guard'
 
 @Controller('account')
+@UseGuards(AuthGuard)
 export class AccountController {
 	constructor(private readonly accountService: AccountService) {}
 
-	// @Post('/login')
-	// loginAccount(@Body() accountLoginDTO: AccountLoginFormDTO): Promise<AccountLoginDTO> {
-	// 	return this.accountService.login(accountLoginDTO)
-	// }
+	@Get('/protected')
+	testProtected() {
+		return 'protected'
+	}
 
-	// @Post('/register')
-	// registerAccount(@Body() accountRegisterFormDTO: AccountRegisterFormDTO): Promise<ToastDTO> {
-	// 	return this.accountService.register(accountRegisterFormDTO)
-	// }
+	@Get('/protected-2')
+	testProtected2() {
+		return 'protected2'
+	}
 }

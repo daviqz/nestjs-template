@@ -8,7 +8,7 @@ const parseZodResponse = <T>(zodObject: ZodTypeAny, formObject: T): Record<strin
 	if (!result.success) {
 		errors = result.error.errors.reduce((acc, err) => {
 			const field = err.path.join('.')
-			const message = translateValidationMessage(err)
+			const message = translateValidationMessage(err.message)
 			return { ...acc, [field]: message }
 		}, {})
 	}

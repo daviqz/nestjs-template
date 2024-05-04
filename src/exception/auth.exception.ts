@@ -28,3 +28,10 @@ export class EmailAlreadyUsedException extends BaseException {
 		super({ message: 'Este e-mail já está em uso' }, HttpStatus.BAD_REQUEST)
 	}
 }
+
+//General
+export class UnauthorizedException extends BaseException {
+	constructor() {
+		super({ message: 'Não autorizado', toast: new ToastDTO('Não autorizado', ToastType.ERROR) }, HttpStatus.BAD_REQUEST)
+	}
+}
