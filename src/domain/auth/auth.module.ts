@@ -2,14 +2,22 @@ import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { AuthController } from '../../domain/auth/auth.controller'
 import { AuthService } from './auth.service'
-import { dataSourceConfig } from '../../config/typeorm-datasource.config'
 import { AccountService } from '../account/account.service'
 import { Account } from '../account/account.entity'
+import { AuthGuard } from './auth.guard'
+import { APP_GUARD } from '@nestjs/core'
 
 @Module({
-	imports: [TypeOrmModule.forRoot(dataSourceConfig), TypeOrmModule.forFeature([Account])],
+	imports: [TypeOrmModule.forFeature([Account])],
 	controllers: [AuthController],
-	providers: [AuthService, AccountService],
+	providers: [
+		AuthService,
+		AccountService,
+		{
+			provide: APP_GUARD,
+			useClass: AuthGuard
+		}
+	],
 	exports: []
 })
 export class AuthModule {}

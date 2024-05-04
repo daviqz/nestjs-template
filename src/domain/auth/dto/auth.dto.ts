@@ -1,6 +1,6 @@
-import { AccountDTO } from '../../account/dto/account.dto'
+import { AuthAccountDTO } from './auth-account.dto'
 
 export class AuthDTO {
-	account: AccountDTO
+	account: AuthAccountDTO
 	token: string
 }

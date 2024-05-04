@@ -5,6 +5,7 @@ import { Organization } from '../organization/organization.entity'
 import { Membership } from '../membership/membership.entity'
 import { AuthRegisterDTO } from 'src/domain/auth/dto/auth-register.dto'
 import { AccountDTO } from 'src/domain/account/dto/account.dto'
+import { AuthAccountDTO } from '../auth/dto/auth-account.dto'
 
 @Entity()
 export class Account extends BaseModel {
@@ -58,11 +59,32 @@ export class Account extends BaseModel {
 
 	toDTO(): AccountDTO {
 		return {
+			id: this.id,
 			username: this.username,
 			email: this.email,
 			accountViewType: this.accountViewType,
 			organizations: this.organizations,
-			memberships: this.memberships
+			memberships: this.memberships,
+			createdAt: this.createdAt,
+			updatedAt: this.updatedAt
+		}
+	}
+
+	toAuthAccountDTO(): AuthAccountDTO {
+		return {
+			username: this.username,
+			email: this.email
+		}
+	}
+
+	toAuthTokenDTO(): AccountDTO {
+		return {
+			id: this.id,
+			username: this.username,
+			email: this.email,
+			accountViewType: this.accountViewType,
+			createdAt: this.createdAt,
+			updatedAt: this.updatedAt
 		}
 	}
 }
