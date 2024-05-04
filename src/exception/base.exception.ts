@@ -5,6 +5,7 @@ interface UserExceptionMessage {
 	message: string
 	toast?: ToastDTO
 	fieldErrors?: any
+	isExpiredToken?: boolean
 }
 
 interface ExceptionMessage extends UserExceptionMessage {

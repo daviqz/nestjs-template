@@ -9,11 +9,11 @@ export class AccountController {
 
 	@Get('/protected')
 	testProtected() {
-		return 'protected'
+		return { fafau: 'protected' }
 	}
 
 	@Get('/protected-2')
 	testProtected2() {
-		return 'protected2'
+		return { fafau: 'protected2' }
 	}
 }
