@@ -1,4 +1,7 @@
-export const constants = () => ({
+import dotenv from 'dotenv'
+dotenv.config()
+
+export const constants = {
 	DATABASE: {
 		HOST: process.env.DATABASE_HOST,
 		PORT: parseInt(process.env.DATABASE_PORT, 10),
@@ -10,4 +13,4 @@ export const constants = () => ({
 		SECRET: process.env.JWT_SECRET,
 		EXPIRES_IN: process.env.JWT_EXPIRES_IN
 	}
-})
+}

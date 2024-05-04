@@ -5,6 +5,7 @@ import { GenericException } from 'src/exception/generic.exception'
 export class AllExceptionsFilter implements ExceptionFilter {
 	catch(exception: HttpException, host: ArgumentsHost) {
 		if (!(exception instanceof HttpException)) {
+			console.error(exception)
 			exception = new GenericException()
 		}
 

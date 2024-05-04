@@ -1,19 +1,20 @@
 import { HttpException, HttpStatus } from '@nestjs/common'
 import { ToastDTO } from 'src/common/toast.dto'
 
-export interface UserExceptionMessage {
+interface UserExceptionMessage {
 	message: string
 	toast?: ToastDTO
 	fieldErrors?: any
+	isExpiredToken?: boolean
 }
 
-export interface ExceptionMessage extends UserExceptionMessage {
-	status: HttpStatus
+interface ExceptionMessage extends UserExceptionMessage {
+	statusCode: HttpStatus
 }
 
 export class BaseException extends HttpException {
 	constructor(userMessage: UserExceptionMessage, status: HttpStatus) {
-		const message: ExceptionMessage = { ...userMessage, status: status }
+		const message: ExceptionMessage = { ...userMessage, statusCode: status }
 		super(message, status)
 	}
 }
