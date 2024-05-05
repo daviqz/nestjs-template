@@ -12,7 +12,7 @@ import { JwtStrategy } from './jwt.strategy'
 @Module({
 	imports: [
 		PassportModule.register({ defaultStrategy: 'jwt' }),
-		JwtModule.register({ secret: constants.JWT.SECRET, global: true, signOptions: { expiresIn: constants.JWT.EXPIRES_IN } }),
+		JwtModule.register({ secret: constants.JWT.SECRET, global: true }),
 		TypeOrmModule.forFeature([Account])
 	],
 	controllers: [AuthController],

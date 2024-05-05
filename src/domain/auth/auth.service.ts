@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import bcrypt from 'bcrypt'
-import { EmailAlreadyUsedException, InvalidLoginException, InvalidRegistrationException } from 'src/exception/auth.exception'
+import { InvalidLoginException, InvalidRegistrationException } from 'src/exception/auth.exception'
 import { AccountService } from 'src/domain/account/account.service'
 import { validateRegisterForm } from 'src/validations/auth.validation'
 import { ToastDTO, ToastType } from 'src/common/toast.dto'
 import { AuthDTO } from './dto/auth.dto'
 import { AuthLoginDTO } from './dto/auth-login.dto'
 import { AuthRegisterDTO } from './dto/auth-register.dto'
+import { constants } from 'src/config/constants'
 
 @Injectable()
 export class AuthService {
@@ -27,7 +28,7 @@ export class AuthService {
 		}
 		const authAccountDTO = account.toAuthAccountDTO()
 		const accountDTO = account.toAuthTokenDTO()
-		const tokenizedAccount = await this.jwtService.signAsync(accountDTO)
+		let tokenizedAccount = await this.jwtService.signAsync(accountDTO, { expiresIn: constants.JWT.EXPIRES_IN })
 
 		return {
 			account: authAccountDTO,
@@ -37,10 +38,14 @@ export class AuthService {
 
 	async register(authRegisterDTO: AuthRegisterDTO): Promise<ToastDTO> {
 		let emailAlredyUsed = await this.accountService.findOneByEmail(authRegisterDTO.email)
+		let fieldErrors = validateRegisterForm(authRegisterDTO)
 		if (emailAlredyUsed) {
-			throw new EmailAlreadyUsedException()
+			if (!fieldErrors) {
+				fieldErrors = {}
+			}
+			fieldErrors.email = 'Email já cadastrado'
 		}
-		const fieldErrors = validateRegisterForm(authRegisterDTO)
+
 		if (fieldErrors) {
 			throw new InvalidRegistrationException(fieldErrors)
 		}
