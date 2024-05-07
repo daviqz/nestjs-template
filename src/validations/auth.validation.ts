@@ -1,5 +1,4 @@
-import { AuthRegisterDTO } from 'src/domain/auth/dto/auth-register.dto'
-import { AuthLoginDTO } from 'src/domain/auth/dto/auth-login.dto'
+import { AuthRegisterDTO, AuthLoginDTO } from 'src/domain/auth/dto/auth.dtos'
 import { LoginFormZod, RegisterFormZod } from './utils/objects-zod-validation.utils'
 import { parseZodResponse } from './utils/parse-response-zod-validation.utils'
 

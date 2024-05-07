@@ -18,6 +18,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 		// Por exemplo, pode verificar se o usuário existe no banco de dados.
 		// Se a validação falhar, dá pra lançar uma UnauthorizedException.
 
-		return { userId: payload.sub, username: payload.username }
+		return { userId: payload.id, username: payload.username }
 	}
 }

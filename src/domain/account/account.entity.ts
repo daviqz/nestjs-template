@@ -3,9 +3,9 @@ import { BaseModel } from '../../common/base.entity'
 import { AccountType } from '../account-type/account-type.entity'
 import { Organization } from '../organization/organization.entity'
 import { Membership } from '../membership/membership.entity'
-import { AuthRegisterDTO } from 'src/domain/auth/dto/auth-register.dto'
+import { AuthRegisterDTO } from 'src/domain/auth/dto/auth.dtos'
 import { AccountDTO } from 'src/domain/account/dto/account.dto'
-import { AuthAccountDTO } from '../auth/dto/auth-account.dto'
+import { AuthAccountDTO } from '../auth/dto/auth.dtos'
 
 @Entity()
 export class Account extends BaseModel {

@@ -5,10 +5,7 @@ import { InvalidLoginException, InvalidRegistrationException } from 'src/excepti
 import { AccountService } from 'src/domain/account/account.service'
 import { validateRegisterForm } from 'src/validations/auth.validation'
 import { ToastDTO, ToastType } from 'src/common/toast.dto'
-import { AuthDTO } from './dto/auth.dto'
-import { AuthLoginDTO } from './dto/auth-login.dto'
-import { AuthRegisterDTO } from './dto/auth-register.dto'
-import { constants } from 'src/config/constants'
+import { AuthDTO, AuthLoginDTO, AuthRegisterDTO } from './dto/auth.dtos'
 
 @Injectable()
 export class AuthService {
@@ -28,7 +25,7 @@ export class AuthService {
 		}
 		const authAccountDTO = account.toAuthAccountDTO()
 		const accountDTO = account.toAuthTokenDTO()
-		let tokenizedAccount = await this.jwtService.signAsync(accountDTO, { expiresIn: constants.JWT.EXPIRES_IN })
+		let tokenizedAccount = await this.jwtService.signAsync(accountDTO, { expiresIn: '5s' })
 
 		return {
 			account: authAccountDTO,
