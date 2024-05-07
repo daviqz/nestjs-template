@@ -5,9 +5,7 @@ import { InvalidLoginException, InvalidRegistrationException } from 'src/excepti
 import { AccountService } from 'src/domain/account/account.service'
 import { validateRegisterForm } from 'src/validations/auth.validation'
 import { ToastDTO, ToastType } from 'src/common/toast.dto'
-import { AuthDTO } from './dto/auth.dto'
-import { AuthLoginDTO } from './dto/auth-login.dto'
-import { AuthRegisterDTO } from './dto/auth-register.dto'
+import { AuthDTO, AuthLoginDTO, AuthRegisterDTO } from './dto/auth.dtos'
 import { constants } from 'src/config/constants'
 
 @Injectable()

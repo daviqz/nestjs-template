@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { Account } from './account.entity'
-import { AuthRegisterDTO } from 'src/domain/auth/dto/auth-register.dto'
+import { AuthRegisterDTO } from 'src/domain/auth/dto/auth.dtos'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 
